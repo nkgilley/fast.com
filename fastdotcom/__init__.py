@@ -1,11 +1,7 @@
-#!/usr/bin/env python
-
 '''
 Python CLI-tool (without need for a GUI) to measure Internet speed with fast.com
 
 '''
-
-
 import os
 import json
 import urllib.request, urllib.parse, urllib.error
@@ -27,6 +23,7 @@ def gethtmlresult(url,result,index):
       result[index] = i*CHUNK
       i=i+1
 
+
 def application_bytes_to_networkbits(bytes):
   # convert bytes (at application layer) to bits (at network layer)
   return bytes * 8 * 1.0415
@@ -42,6 +39,7 @@ def findipv4(fqdn):
   ipv4 = socket.getaddrinfo(fqdn, 80, socket.AF_INET)[0][4][0]
   return ipv4
 
+
 def findipv6(fqdn):
   '''
     find IPv6 address of fqdn
@@ -54,7 +52,7 @@ def findipv6(fqdn):
 def fast_com(verbose=False, maxtime=15, forceipv4=False, forceipv6=False):
   '''
     verbose: print debug output
-    maxtime: max time in seconds to monitor speedtest 
+    maxtime: max time in seconds to monitor speedtest
     forceipv4: force speed test over IPv4
     forceipv6: force speed test over IPv6
   '''
@@ -68,7 +66,7 @@ def fast_com(verbose=False, maxtime=15, forceipv4=False, forceipv6=False):
   response = urlresult.read().decode().strip()
   for line in response.split('\n'):
     # We're looking for a line like
-    #           <script src="/app-40647a.js"></script> 
+    #           <script src="/app-40647a.js"></script>
     if line.find('script src') >= 0:
       jsname = line.split('"')[1] # At time of writing: '/app-40647a.js'
 
@@ -77,7 +75,7 @@ def fast_com(verbose=False, maxtime=15, forceipv4=False, forceipv6=False):
   url = 'https://fast.com' + jsname
   if verbose: print("javascript url is", url)
   urlresult = urllib.request.urlopen(url)
-  allJSstuff = urlresult.read().decode().strip() # this is a obfuscated Javascript file 
+  allJSstuff = urlresult.read().decode().strip() # this is a obfuscated Javascript file
   for line in allJSstuff.split(','):
     if line.find('token:') >= 0:
       if verbose: print("line is", line)
@@ -93,7 +91,7 @@ def fast_com(verbose=False, maxtime=15, forceipv4=False, forceipv6=False):
     ipv4 = findipv4('api.fast.com')
     baseurl = 'http://' + ipv4 + '/'  # HTTPS does not work IPv4 addresses, thus use HTTP
   elif forceipv6:
-    # force IPv6 
+    # force IPv6
     ipv6 = findipv6('api.fast.com')
     baseurl = 'http://[' + ipv6 + ']/'
 
@@ -137,7 +135,7 @@ def fast_com(verbose=False, maxtime=15, forceipv4=False, forceipv6=False):
     threads[i].daemon=True
     threads[i].start()
 
-  # Monitor the amount of bytes (and speed) of the threads 
+  # Monitor the amount of bytes (and speed) of the threads
   time.sleep(1)
   sleepseconds = 3  # 3 seconds sleep
   lasttotal = 0
@@ -168,8 +166,7 @@ def fast_com(verbose=False, maxtime=15, forceipv4=False, forceipv6=False):
 
 ######## MAIN #################
 
-
-if __name__ == "__main__": 
+if __name__ == "__main__":
   print("let's speed test:")
   print("\nSpeed test, without logging:")
   print(fast_com())
@@ -182,5 +179,4 @@ if __name__ == "__main__":
   #fast_com(verbose=True, maxtime=25)
 
   print("\ndone")
-
 
