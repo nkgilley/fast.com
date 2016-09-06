@@ -10,3 +10,11 @@ In [2]: fastdotcom.fast_com()
 Out[2]: 29.3
 
 ```
+
+## Development
+
+Push new releases with
+
+```
+python setup.py sdist upload
+```
