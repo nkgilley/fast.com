@@ -14,7 +14,12 @@ def gethtmlresult(url,result,index):
   '''
   get the stuff from url in chuncks of size CHUNK, and keep writing the number of bytes retrieved into result[index]
   '''
-  req = urllib.request.urlopen(url)
+  try:
+    req = urllib.request.urlopen(url)
+  except urllib.error.URLError:
+    result[index] = 0
+    return
+
   CHUNK = 100 * 1024
   i=1
   while True:
