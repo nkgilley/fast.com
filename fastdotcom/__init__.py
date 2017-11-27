@@ -79,7 +79,11 @@ def fast_com(verbose=False, maxtime=15, forceipv4=False, forceipv6=False):
   # From that javascript file, get the token:
   url = 'https://fast.com' + jsname
   if verbose: print("javascript url is", url)
-  urlresult = urllib.request.urlopen(url)
+  try:
+    urlresult = urllib.request.urlopen(url)
+  except:
+    # connection is broken
+    return 0
   allJSstuff = urlresult.read().decode().strip() # this is a obfuscated Javascript file
   for line in allJSstuff.split(','):
     if line.find('token:') >= 0:
