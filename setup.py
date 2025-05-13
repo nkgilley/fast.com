@@ -33,11 +33,11 @@ SOFTWARE.
 """
 
 setup(name='fastdotcom',
-      version='0.0.3',
+      version='0.0.4',
       description='Python API for testing internet speed on Fast.com',
       url='https://github.com/nkgilley/fast.com',
       author='Nolan Gilley',
       license='MIT',
-      install_requires=['requests>=2.0'],
+      install_requires=['requests>=2.0','icmplib>=3.0.4'],
       packages=['fastdotcom'],
       zip_safe=True)
