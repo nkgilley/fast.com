@@ -681,13 +681,13 @@ def fast_com(
 ):
     token = get_fast_token(verbose=verbose)
     if not token:
-        return (
-    "download_speed": 0,
-    "upload_speed": 0,
-    "unloaded_ping": 0,
-    "loaded_ping": 0,
-    "success": 0,
-        )
+        return {
+        "download_speed": 0,
+        "upload_speed": 0,
+        "unloaded_ping": 0,
+        "loaded_ping": 0,
+        "success": 0,
+        }
 
     avg_ping_unloaded, ping_unloaded_vals = fast_com_ping_unloaded(
         token=token, verbose=verbose, count=ping_count
