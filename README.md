@@ -32,13 +32,14 @@ print(result)
 
 When you run the example above, you might see output similar to:
 ```bash
-{'download_speed': 120.68, 'upload_speed': 25.93, 'unloaded_ping': 19.35, 'loaded_ping': 48.64}
+{'download_speed': 120.68, 'upload_speed': 25.93, 'unloaded_ping': 19.35, 'loaded_ping': 48.64, 'success': 1}
 ```
 
 - **Download Speed:** Measured download speed in Mbps (displayed with two decimal places).
 - **Upload Speed:** Measured upload speed in Mbps (displayed with two decimal places).
 - **Unloaded Ping:** Average ping (latency) when the network is idle.
 - **Loaded Ping:** Average ping (latency) during a download test.
+- **Success:** An indication if the speed test was performed successfully (zero if no internet connection was available).
 
 ## Requirements
 - Python 3.8 or newer

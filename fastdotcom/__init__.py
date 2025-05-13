@@ -681,13 +681,13 @@ def fast_com(
 ):
     token = get_fast_token(verbose=verbose)
     if not token:
-        return (
-            "Failed to get token. All test values will be 0.\n"
-            "Download Speed: 0.00 Mbps\n"
-            "Upload Speed: 0.00 Mbps\n"
-            "Unloaded Ping: 0 ms\n"
-            "Loaded Ping: 0 ms"
-        )
+        return {
+        "download_speed": 0,
+        "upload_speed": 0,
+        "unloaded_ping": 0,
+        "loaded_ping": 0,
+        "success": 0,
+        }
 
     avg_ping_unloaded, ping_unloaded_vals = fast_com_ping_unloaded(
         token=token, verbose=verbose, count=ping_count
@@ -704,6 +704,7 @@ def fast_com(
     "upload_speed": upload_speed_dynamic,
     "unloaded_ping": avg_ping_unloaded,
     "loaded_ping": avg_ping_loaded,
+    "success": 1,
     }
     return result
 
