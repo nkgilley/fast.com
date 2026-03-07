@@ -512,7 +512,7 @@ def upload_js_comparable_dynamic_test(token, verbose=False, max_time=15, candida
         int: Highest upload speed in Mbps (rounded to 0 decimals).
     """
     if candidate_sizes is None:
-        candidate_sizes = [64 * 10240, 128 * 1024, 256 * 1024, 512 * 1024]
+        candidate_sizes = [64 * 1024, 128 * 1024, 256 * 1024, 512 * 1024]
 
     best_speed = 0
     start_time = time.perf_counter()
