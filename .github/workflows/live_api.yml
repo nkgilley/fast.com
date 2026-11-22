@@ -1,0 +1,30 @@
+# Runs an ultra-low-bandwidth Fast.com protocol smoke test (single connection,
+# 4 KiB byte-range probes, <1 MiB total) rather than a full throughput benchmark
+# so GitHub-hosted runner traffic remains minimal and GitHub AUP compliant.
+name: Live Fast.com API Smoke Test
+
+on:
+  schedule:
+    - cron: "0 10 * * 1"
+  workflow_dispatch:
+
+jobs:
+  live-api:
+    name: Live fast.com protocol smoke test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up uv and Python 3.13
+        uses: astral-sh/setup-uv@v10.4.0
+        with:
+          enable-cache: true
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: uv sync --locked --all-groups
+
+      - name: Run minimal-bandwidth live Fast.com smoke test
+        run: uv run pytest -m real_api_call --no-cov

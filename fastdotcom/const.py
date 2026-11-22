@@ -1,0 +1,38 @@
+"""Constants and protocol defaults for fastdotcom."""
+
+from __future__ import annotations
+
+import re
+
+FAST_COM_URL = "https://fast.com/"
+FAST_API_V2_URL = "https://api.fast.com/netflix/speedtest/v2"
+
+DEFAULT_TIMEOUT = 15.0
+DEFAULT_PROBE_TIMEOUT = 5.0
+
+DEFAULT_MIN_TIME = 5.0
+DEFAULT_MAX_TIME = 15.0
+
+DEFAULT_SAMPLE_INTERVAL = 0.5
+DEFAULT_WINDOW_SIZE = 3
+DEFAULT_STABILITY_SAMPLES = 4
+DEFAULT_STABILITY_THRESHOLD = 0.05
+
+DEFAULT_CONNECTIONS_MIN = 1
+DEFAULT_CONNECTIONS_MAX = 8
+DEFAULT_URL_COUNT = 5
+
+DEFAULT_PING_COUNT = 5
+DEFAULT_PING_INTERVAL = 0.5
+
+DEFAULT_DOWNLOAD_CHUNK_SIZE = 128 * 1024
+DEFAULT_UPLOAD_CHUNK_SIZE = 256 * 1024
+DEFAULT_UPLOAD_PAYLOAD_SIZE = 4 * 1024 * 1024
+
+SPEED_THRESHOLD_3_CONN_MBPS = 1.0
+SPEED_THRESHOLD_5_CONN_MBPS = 10.0
+SPEED_THRESHOLD_MAX_CONN_MBPS = 50.0
+
+SCRIPT_SRC_RE = re.compile(r'<script[^>]+src="([^"]+\.js)"')
+TOKEN_RE = re.compile(r'token:"([^"]+)"')
+SPEEDTEST_PATH_RE = re.compile(r"/speedtest(?:/range/[^/]+)?$")
